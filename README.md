@@ -43,3 +43,8 @@ Not that an equivalence formula, a <=> b, is true iff a <-> b is a tautology.
 
 The implementation of this SAT solver is a very simplistic implementation of
 the [DPLL algorithm](http://en.wikipedia.org/wiki/DPLL_algorithm).
+
+## Other Uses
+
+twocolor.py shows how predicate logic can be simply used to describe a 
+two-coloring of a graph.
