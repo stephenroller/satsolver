@@ -15,9 +15,14 @@ A simple SAT solver implemented in Python.
     => {'a': False, 'b': True}
     done.
     
-    sr ~/Wo/satsolver $ python solver.py 'a & !a'
+    $ python solver.py 'a & !a'
     =? a & !a
     unsatisfiable.
+    done.
+    
+    $ python solver.py '(p -> q) <=> (!p | q)'
+    =? (p -> q) <=> (!p | q)
+    => True
     done.
 
 ## Base Connectors
