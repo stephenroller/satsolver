@@ -1,6 +1,6 @@
 # Simple SAT Solver
 
-This is a simple SAT solver implemented in Python.
+A simple SAT solver implemented in Python.
 
 ## Example Usage:
 
@@ -33,3 +33,8 @@ This is a simple SAT solver implemented in Python.
   * equivalence (<=>)
 
 Not that an equivalence formula, a <=> b, is true iff a <-> b is a tautology.
+
+## Implementation
+
+The implementation of this SAT solver is a very simplistic implementation of
+the [DPLL algorithm](http://en.wikipedia.org/wiki/DPLL_algorithm).
