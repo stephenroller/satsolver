@@ -22,10 +22,12 @@ def or_(arg1, arg2):
         return arg1
 
 def if_(arg1, arg2):
-    if isinstance(arg1, bool) and not arg1:
-        return True
-    elif isinstance(arg2, bool):
+    if isinstance(arg1, bool) and arg1:
         return arg2
+    elif isinstance(arg1, bool) and not arg1:
+        return True
+    elif isinstance(arg2, bool) and arg2:
+        return True
 
 def fi_(arg1, arg2):
     return if_(arg2, arg1)
