@@ -4,6 +4,7 @@ from tokens import tokens
 
 precedence = (
     ('left', 'EQL'),
+    ('left', 'ORD2'),
     ('left', 'IFF'),
     ('left', 'IF', 'FI'),
     ('left', 'OR'),
@@ -16,18 +17,20 @@ def p_exists(p):
     '''expr : EXISTS atoms LPAR expr RPAR  %prec EXISTS
     '''
     tree = p[4]
-    for atom in p[2]:
+    for atom in p[2][1:]:
         tree = [p[1], atom, tree]
     p[0] = tree
 
 def p_atoms(p):
-    '''atoms : ATOM atoms
+    '''atoms : atoms COMMA ATOM
+             | LPAR atoms RPAR
              | ATOM
     '''
+    PASS = 'PASS'
     if len(p) == 2:
-        p[0] = [p[1]]
+        p[0] = [PASS, p[1]]
     else:
-        p[0] = [p[1]] + p[2]
+        p[0] = [PASS] + p[1][1:] + [p[3]]
 
 def p_expr_paren(p):
     '''expr : LPAR expr RPAR'''
@@ -36,6 +39,11 @@ def p_expr_paren(p):
 def p_expr_unary(p):
     '''expr : NOT expr            %prec NOT'''
     p[0] = [p[1], p[2]]
+
+def p_ord2_binop(p):
+    '''expr : LPAR atoms RPAR ORD2 LPAR atoms RPAR
+    '''
+    p[0] = [p[4], p[2], p[6]]
 
 def p_expr_binop(p):
     '''expr : expr EQL expr       %prec EQL

@@ -5,9 +5,9 @@ _tabversion = '3.2'
 
 _lr_method = 'LALR'
 
-_lr_signature = '\xf3\x88^\x98\xd4aw\x013\xea=\xed-\xb9.\x8d'
+_lr_signature = "i.\xd8D\x17C\x88\xda'I\xb8j+\xab\x85\x8f"
     
-_lr_action_items = {'AND':([2,4,5,6,8,9,18,19,22,23,24,25,26,27,28,29,],[-13,12,-12,-15,-14,12,-5,-4,-11,12,12,12,12,12,12,-1,]),'LPAR':([0,1,7,10,11,12,13,14,15,16,17,20,21,],[1,1,1,-3,21,1,1,1,1,1,1,-2,1,]),'FALSE':([0,1,7,12,13,14,15,16,17,21,],[2,2,2,2,2,2,2,2,2,2,]),'EXISTS':([0,1,7,12,13,14,15,16,17,21,],[3,3,3,3,3,3,3,3,3,3,]),'RPAR':([2,5,6,8,9,18,19,22,23,24,25,26,27,28,29,],[-13,-12,-15,-14,19,-5,-4,-11,-7,-6,-8,-10,-9,29,-1,]),'IFF':([2,4,5,6,8,9,18,19,22,23,24,25,26,27,28,29,],[-13,13,-12,-15,-14,13,-5,-4,-11,-7,13,-8,-10,-9,13,-1,]),'EQL':([2,4,5,6,8,9,18,19,22,23,24,25,26,27,28,29,],[-13,14,-12,-15,-14,14,-5,-4,-11,-7,-6,-8,-10,-9,14,-1,]),'ATOM':([0,1,3,7,10,12,13,14,15,16,17,21,],[6,6,10,6,10,6,6,6,6,6,6,6,]),'NOT':([0,1,7,12,13,14,15,16,17,21,],[7,7,7,7,7,7,7,7,7,7,]),'FI':([2,4,5,6,8,9,18,19,22,23,24,25,26,27,28,29,],[-13,15,-12,-15,-14,15,-5,-4,-11,15,15,-8,-10,-9,15,-1,]),'IF':([2,4,5,6,8,9,18,19,22,23,24,25,26,27,28,29,],[-13,17,-12,-15,-14,17,-5,-4,-11,17,17,-8,-10,-9,17,-1,]),'TRUE':([0,1,7,12,13,14,15,16,17,21,],[8,8,8,8,8,8,8,8,8,8,]),'OR':([2,4,5,6,8,9,18,19,22,23,24,25,26,27,28,29,],[-13,16,-12,-15,-14,16,-5,-4,-11,16,16,16,-10,16,16,-1,]),'$end':([2,4,5,6,8,18,19,22,23,24,25,26,27,29,],[-13,0,-12,-15,-14,-5,-4,-11,-7,-6,-8,-10,-9,-1,]),}
+_lr_action_items = {'AND':([2,4,5,6,8,10,11,22,24,29,30,31,32,33,34,39,41,43,],[-15,16,-14,-17,-16,16,-17,-6,-5,-13,16,16,16,16,16,16,-1,-7,]),'LPAR':([0,1,3,7,9,13,14,15,16,17,18,19,20,21,28,36,37,38,40,],[1,9,13,1,9,13,-4,28,1,1,1,1,1,1,1,40,-2,-3,13,]),'FALSE':([0,1,7,9,16,17,18,19,20,21,28,],[2,2,2,2,2,2,2,2,2,2,2,]),'EXISTS':([0,1,7,9,16,17,18,19,20,21,28,],[3,3,3,3,3,3,3,3,3,3,3,]),'RPAR':([2,5,6,8,10,11,12,14,22,23,24,27,29,30,31,32,33,34,35,37,38,39,41,42,43,],[-15,-14,-17,-16,24,-4,25,-4,-6,35,-5,38,-13,-9,-8,-10,-12,-11,-3,-2,-3,41,-1,43,-7,]),'ORD2':([25,35,],[36,36,]),'IFF':([2,4,5,6,8,10,11,22,24,29,30,31,32,33,34,39,41,43,],[-15,17,-14,-17,-16,17,-17,-6,-5,-13,-9,17,-10,-12,-11,17,-1,-7,]),'COMMA':([11,12,14,15,23,27,35,37,38,42,],[-4,26,-4,26,26,26,-3,-2,-3,26,]),'EQL':([2,4,5,6,8,10,11,22,24,29,30,31,32,33,34,39,41,43,],[-15,18,-14,-17,-16,18,-17,-6,-5,-13,-9,-8,-10,-12,-11,18,-1,-7,]),'ATOM':([0,1,3,7,9,13,16,17,18,19,20,21,26,28,40,],[6,11,14,6,11,14,6,6,6,6,6,6,37,6,14,]),'NOT':([0,1,7,9,16,17,18,19,20,21,28,],[7,7,7,7,7,7,7,7,7,7,7,]),'FI':([2,4,5,6,8,10,11,22,24,29,30,31,32,33,34,39,41,43,],[-15,19,-14,-17,-16,19,-17,-6,-5,-13,19,19,-10,-12,-11,19,-1,-7,]),'IF':([2,4,5,6,8,10,11,22,24,29,30,31,32,33,34,39,41,43,],[-15,21,-14,-17,-16,21,-17,-6,-5,-13,21,21,-10,-12,-11,21,-1,-7,]),'TRUE':([0,1,7,9,16,17,18,19,20,21,28,],[8,8,8,8,8,8,8,8,8,8,8,]),'OR':([2,4,5,6,8,10,11,22,24,29,30,31,32,33,34,39,41,43,],[-15,20,-14,-17,-16,20,-17,-6,-5,-13,20,20,20,-12,20,20,-1,-7,]),'$end':([2,4,5,6,8,22,24,29,30,31,32,33,34,41,43,],[-15,0,-14,-17,-16,-6,-5,-13,-9,-8,-10,-12,-11,-1,-7,]),}
 
 _lr_action = { }
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'expr':([0,1,7,12,13,14,15,16,17,21,],[4,9,18,22,23,24,25,26,27,28,]),'literal':([0,1,7,12,13,14,15,16,17,21,],[5,5,5,5,5,5,5,5,5,5,]),'atoms':([3,10,],[11,20,]),}
+_lr_goto_items = {'expr':([0,1,7,9,16,17,18,19,20,21,28,],[4,10,22,10,29,30,31,32,33,34,39,]),'literal':([0,1,7,9,16,17,18,19,20,21,28,],[5,5,5,5,5,5,5,5,5,5,5,]),'atoms':([1,3,9,13,40,],[12,15,23,27,42,]),}
 
 _lr_goto = { }
 for _k, _v in _lr_goto_items.items():
@@ -26,19 +26,21 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> expr","S'",1,None,None,None),
-  ('expr -> EXISTS atoms LPAR expr RPAR','expr',5,'p_exists','/Users/stephen/Working/satsolver/parser.py',16),
-  ('atoms -> ATOM atoms','atoms',2,'p_atoms','/Users/stephen/Working/satsolver/parser.py',24),
-  ('atoms -> ATOM','atoms',1,'p_atoms','/Users/stephen/Working/satsolver/parser.py',25),
-  ('expr -> LPAR expr RPAR','expr',3,'p_expr_paren','/Users/stephen/Working/satsolver/parser.py',30),
-  ('expr -> NOT expr','expr',2,'p_expr_unary','/Users/stephen/Working/satsolver/parser.py',34),
-  ('expr -> expr EQL expr','expr',3,'p_expr_binop','/Users/stephen/Working/satsolver/parser.py',38),
-  ('expr -> expr IFF expr','expr',3,'p_expr_binop','/Users/stephen/Working/satsolver/parser.py',39),
-  ('expr -> expr FI expr','expr',3,'p_expr_binop','/Users/stephen/Working/satsolver/parser.py',40),
-  ('expr -> expr IF expr','expr',3,'p_expr_binop','/Users/stephen/Working/satsolver/parser.py',41),
-  ('expr -> expr OR expr','expr',3,'p_expr_binop','/Users/stephen/Working/satsolver/parser.py',42),
-  ('expr -> expr AND expr','expr',3,'p_expr_binop','/Users/stephen/Working/satsolver/parser.py',43),
-  ('expr -> literal','expr',1,'p_expr_literal','/Users/stephen/Working/satsolver/parser.py',48),
-  ('literal -> FALSE','literal',1,'p_literal','/Users/stephen/Working/satsolver/parser.py',52),
-  ('literal -> TRUE','literal',1,'p_literal','/Users/stephen/Working/satsolver/parser.py',53),
-  ('literal -> ATOM','literal',1,'p_literal','/Users/stephen/Working/satsolver/parser.py',54),
+  ('expr -> EXISTS atoms LPAR expr RPAR','expr',5,'p_exists','/Users/stephen/Working/satsolver/parser.py',17),
+  ('atoms -> atoms COMMA ATOM','atoms',3,'p_atoms','/Users/stephen/Working/satsolver/parser.py',25),
+  ('atoms -> LPAR atoms RPAR','atoms',3,'p_atoms','/Users/stephen/Working/satsolver/parser.py',26),
+  ('atoms -> ATOM','atoms',1,'p_atoms','/Users/stephen/Working/satsolver/parser.py',27),
+  ('expr -> LPAR expr RPAR','expr',3,'p_expr_paren','/Users/stephen/Working/satsolver/parser.py',36),
+  ('expr -> NOT expr','expr',2,'p_expr_unary','/Users/stephen/Working/satsolver/parser.py',40),
+  ('expr -> LPAR atoms RPAR ORD2 LPAR atoms RPAR','expr',7,'p_ord2_binop','/Users/stephen/Working/satsolver/parser.py',44),
+  ('expr -> expr EQL expr','expr',3,'p_expr_binop','/Users/stephen/Working/satsolver/parser.py',49),
+  ('expr -> expr IFF expr','expr',3,'p_expr_binop','/Users/stephen/Working/satsolver/parser.py',50),
+  ('expr -> expr FI expr','expr',3,'p_expr_binop','/Users/stephen/Working/satsolver/parser.py',51),
+  ('expr -> expr IF expr','expr',3,'p_expr_binop','/Users/stephen/Working/satsolver/parser.py',52),
+  ('expr -> expr OR expr','expr',3,'p_expr_binop','/Users/stephen/Working/satsolver/parser.py',53),
+  ('expr -> expr AND expr','expr',3,'p_expr_binop','/Users/stephen/Working/satsolver/parser.py',54),
+  ('expr -> literal','expr',1,'p_expr_literal','/Users/stephen/Working/satsolver/parser.py',59),
+  ('literal -> FALSE','literal',1,'p_literal','/Users/stephen/Working/satsolver/parser.py',63),
+  ('literal -> TRUE','literal',1,'p_literal','/Users/stephen/Working/satsolver/parser.py',64),
+  ('literal -> ATOM','literal',1,'p_literal','/Users/stephen/Working/satsolver/parser.py',65),
 ]

@@ -49,11 +49,41 @@ def exists_(variable, expr):
     # represents the QBF style form of the existential operator.
     true_bound = dict([(variable, True)])
     false_bound = dict([(variable, False)])
-    return or_(simplify(expr, true_bound), simplify(expr, false_bound))
+    r = [or_, simplify(expr, false_bound), simplify(expr, true_bound)]
+    return r
 
+def lessthan_(leftvars, rightvars):
+    assert len(leftvars) == len(rightvars)
+    return [and_, lessthaneq_(leftvars, rightvars), 
+                  [not_, lessthaneq_(rightvars, leftvars)]]
+
+def lessthaneq_(leftvars, rightvars):
+    assert len(leftvars) == len(rightvars)
+    
+    tree = True
+    for l, r in zip(leftvars, rightvars):
+        tree = [and_, tree, [if_, l, r]]
+    
+    return tree
+
+def greaterthan_(leftvars, rightvars):
+    assert len(leftvars) == len(rightvars)
+    return [and_, greaterthaneq_(leftvars, rightvars),
+                  [not_, greaterthaneq_(rightvars, leftvars)]]
+
+def greaterthaneq_(leftvars, rightvars):
+    assert len(leftvars) == len(rightvars)
+    
+    tree = True
+    for l, r in zip(leftvars, rightvars):
+        tree = [and_, tree, [if_, r, l]]
+    
+    return tree
+
+def ident_(*args):
+    return args
 
 op_functions = {
-    '3': exists_,
     '!': not_,
     '->': if_,
     '<-': fi_,
@@ -61,12 +91,32 @@ op_functions = {
     '&': and_,
     '|': or_,
     '<=>': equiv_,
+    '3': exists_,
+    '<': lessthan_,
+    '>': greaterthan_,
+    '<=': lessthaneq_,
+    '>=': greaterthaneq_,
+    'PASS': ident_,
 }
+
+# macros are functions that are better defined as a syntactical
+# transformation, rather than a function.
+macros = [
+    ident_,
+    lessthan_,
+    greaterthan_,
+    lessthaneq_,
+    greaterthaneq_,
+    exists_,
+]
 
 def prefix_form(L):
     if isinstance(L, list) and len(L) >= 2:
         operator = op_functions[L[0]]
-        return [operator] + map(prefix_form, L[1:])
+        if operator in macros:
+            return operator(*map(prefix_form, L[1:]))
+        else:
+            return [operator] + map(prefix_form, L[1:])
     elif isinstance(L, list) and len(L) == 1:
         return prefix_form(L[0])
     else:

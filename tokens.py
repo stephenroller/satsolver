@@ -11,12 +11,15 @@ tokens = (
     'NOT',
     'LPAR',
     'RPAR',
-    'IFF',
     'IF',
     'FI',
+    'IFF',
     'EQL',
+    'COMMA',
+    'ORD2',
 )
 
+t_COMMA = r','
 t_EXISTS = r'3'
 t_AND = r'&'
 t_OR  = r'\|'
@@ -25,6 +28,7 @@ t_EQL  = r'<=>'
 t_IFF  = r'<->'
 t_IF   = r'->'
 t_FI   = r'<-'
+t_ORD2 = r'<=?|>=?'
 t_LPAR = r'\('
 t_RPAR = r'\)'
 t_ATOM = r'[A-Za-z][A-Za-z0-9_]*'
