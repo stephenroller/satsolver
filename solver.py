@@ -141,12 +141,20 @@ def next_unbound(F):
         return unbound
     raise StopIteration
 
-def simplify(F, bindings=dict()):
+def simplify(F, bindings=dict(), infer=True):
+    '''
+    Simplifies a formula by replacing variables with their bound values.
+    
+    If infer is True, then it will attempt to simplify the formula by
+    simple inference rules, such as T -> p => p.
+    
+    Otherwise, simplify will only dumbly replace variables.
+    '''
     if isinstance(F, list):
         fn = F[0]
-        args = [simplify(a, bindings) for a in F[1:]]
+        args = [simplify(a, bindings, infer) for a in F[1:]]
         r = fn(*args)
-        if r is not None:
+        if r is not None and infer:
             return r
         else:
             return [fn] + args
