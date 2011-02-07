@@ -4,6 +4,7 @@ import ply.lex as lex
 tokens = (
     'FALSE',
     'TRUE',
+    'EXISTS',
     'ATOM',
     'AND',
     'OR',
@@ -16,6 +17,7 @@ tokens = (
     'EQL',
 )
 
+t_EXISTS = r'3'
 t_AND = r'&'
 t_OR  = r'\|'
 t_NOT = r'!'

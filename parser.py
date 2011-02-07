@@ -9,7 +9,25 @@ precedence = (
     ('left', 'OR'),
     ('left', 'AND'),
     ('right', 'NOT'),
+    ('right', 'EXISTS'),
 )
+
+def p_exists(p):
+    '''expr : EXISTS atoms LPAR expr RPAR  %prec EXISTS
+    '''
+    tree = p[4]
+    for atom in p[2]:
+        tree = [p[1], atom, tree]
+    p[0] = tree
+
+def p_atoms(p):
+    '''atoms : ATOM atoms
+             | ATOM
+    '''
+    if len(p) == 2:
+        p[0] = [p[1]]
+    else:
+        p[0] = [p[1]] + p[2]
 
 def p_expr_paren(p):
     '''expr : LPAR expr RPAR'''

@@ -38,7 +38,15 @@ def equiv_(arg1, arg2):
     else:
         return True
 
+def exists_(variable, expr):
+    # represents the QBF style form of the existential operator.
+    true_bound = dict([(variable, True)])
+    false_bound = dict([(variable, False)])
+    return or_(simplify(expr, true_bound), simplify(expr, false_bound))
+
+
 op_functions = {
+    '3': exists_,
     '!': not_,
     '->': if_,
     '<-': fi_,
@@ -49,15 +57,9 @@ op_functions = {
 }
 
 def prefix_form(L):
-    if isinstance(L, list) and len(L) == 3:
+    if isinstance(L, list) and len(L) >= 2:
         operator = op_functions[L[0]]
-        operand1 = prefix_form(L[1])
-        operand2 = prefix_form(L[2])
-        return [operator, operand1, operand2]
-    elif isinstance(L, list) and len(L) == 2:
-        operator = op_functions[L[0]]
-        operand = L[1]
-        return [operator, prefix_form(operand)]
+        return [operator] + map(prefix_form, L[1:])
     elif isinstance(L, list) and len(L) == 1:
         return prefix_form(L[0])
     else:
