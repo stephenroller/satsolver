@@ -4,15 +4,22 @@ from parser import parse
 def and_(arg1, arg2):
     if isinstance(arg1, bool) and arg1:
         return arg2
+    elif isinstance(arg1, bool) and not arg1:
+        return False
     elif isinstance(arg2, bool) and arg2:
         return arg1
-        
+    elif isinstance(arg2, bool) and not arg2:
+        return False
 
 def or_(arg1, arg2):
     if isinstance(arg1, bool) and arg1:
-        return arg1
+        return True
+    elif isinstance(arg1, bool) and not arg1:
+        return arg2
     elif isinstance(arg2, bool) and arg2:
-        return arg2 
+        return True
+    elif isinstance(arg2, bool) and not arg2:
+        return arg1
 
 def if_(arg1, arg2):
     if isinstance(arg1, bool) and not arg1:
