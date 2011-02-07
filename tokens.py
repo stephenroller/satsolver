@@ -17,6 +17,7 @@ tokens = (
     'EQL',
     'COMMA',
     'ORD2',
+    'CIRC_SM',
 )
 
 t_COMMA = r','
@@ -31,7 +32,8 @@ t_FI   = r'<-'
 t_ORD2 = r'<=?|>=?'
 t_LPAR = r'\('
 t_RPAR = r'\)'
-t_ATOM = r'[A-Za-z][A-Za-z0-9_]*'
+t_ATOM = r'[a-z][a-z0-9_]*'
+t_CIRC_SM = r'CIRC|SM'
 
 def t_FALSE(t):
     r'0'

@@ -40,7 +40,12 @@ def p_expr_unary(p):
     '''expr : NOT expr            %prec NOT'''
     p[0] = [p[1], p[2]]
 
-def p_ord2_binop(p):
+def p_expr_circ_sm(p):
+    '''expr : CIRC_SM atoms LPAR expr RPAR
+    '''
+    p[0] = [p[1], p[2], p[4]]
+
+def p_expr_ord2_binop(p):
     '''expr : LPAR atoms RPAR ORD2 LPAR atoms RPAR
     '''
     p[0] = [p[4], p[2], p[6]]

@@ -51,7 +51,7 @@ def exists_(variable, expr):
     # represents the QBF style form of the existential operator.
     true_bound = dict([(variable, True)])
     false_bound = dict([(variable, False)])
-    r = [or_, simplify(expr, false_bound), simplify(expr, true_bound)]
+    r = [or_, simplify(expr, false_bound, False), simplify(expr, true_bound, False)]
     return r
 
 def lessthan_(leftvars, rightvars):
@@ -85,6 +85,19 @@ def greaterthaneq_(leftvars, rightvars):
 def ident_(*args):
     return args
 
+def circ_(vars1, expr):
+    vars2 = [v + '_' for v in vars1]
+    
+    rename_bindings = dict(zip(vars1, vars2))
+    replaced = simplify(expr, rename_bindings, infer=False)
+    
+    tree = [and_, lessthan_(vars2, vars1), replaced]
+    for var_ in vars2:
+        tree = exists_(var_, tree)
+    tree = [and_, expr, [not_, tree]]
+    
+    return tree
+
 op_functions = {
     '!': not_,
     '->': if_,
@@ -99,6 +112,7 @@ op_functions = {
     '<=': lessthaneq_,
     '>=': greaterthaneq_,
     'PASS': ident_,
+    'CIRC': circ_,
 }
 
 # macros are functions that are better defined as a syntactical
@@ -110,6 +124,7 @@ macros = [
     lessthaneq_,
     greaterthaneq_,
     exists_,
+    circ_,
 ]
 
 def parse2ast(L):
