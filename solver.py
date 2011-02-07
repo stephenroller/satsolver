@@ -135,7 +135,15 @@ def solutions(exprstr):
     
 if __name__ == '__main__':
     import sys
+    
     example = len(sys.argv) > 1 and sys.argv[1] or "a | b"
+    example = example.replace("\n", " ")
+    while True:
+        r = example.replace("  ", " ")
+        if r == example:
+            break
+        example = r
+    
     print "=?", example
     satisfied = False
     for solution in solutions(example):

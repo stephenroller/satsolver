@@ -62,7 +62,9 @@ def p_error(p):
     if p is None:
         sys.stdout.write("Unexpected end of file.\n")
     else:
-        sys.stdout.write("Syntax error at '%s' on line %d.\n" % (p.value, p.lineno))
+        sys.stdout.write("-" * (p.lexpos + 3))
+        sys.stdout.write("^\n")
+        sys.stdout.write("Syntax error at '%s'.\n" % p.value)
     sys.exit(1)
 
 def parse(string):
