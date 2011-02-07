@@ -112,15 +112,15 @@ macros = [
     exists_,
 ]
 
-def prefix_form(L):
+def parse2ast(L):
     if isinstance(L, list) and len(L) >= 2:
         operator = op_functions[L[0]]
         if operator in macros:
-            return operator(*map(prefix_form, L[1:]))
+            return operator(*map(parse2ast, L[1:]))
         else:
-            return [operator] + map(prefix_form, L[1:])
+            return [operator] + map(parse2ast, L[1:])
     elif isinstance(L, list) and len(L) == 1:
-        return prefix_form(L[0])
+        return parse2ast(L[0])
     else:
         return L
 
@@ -190,7 +190,7 @@ def satisfiable(F):
     return False
 
 def solutions(exprstr):
-    expression = prefix_form(parse(exprstr))
+    expression = parse2ast(parse(exprstr))
     return dpll(expression)
     
 if __name__ == '__main__':
