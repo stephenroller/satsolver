@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from solver import *
 
 if __name__ == '__main__':
@@ -17,7 +18,7 @@ if __name__ == '__main__':
                 satisfied = True
             if not satisfied:
                 print "unsatisfiable."
-        except KeyboardInterrupt:
+        except (KeyboardInterrupt,EOFError):
             print
             break
     
