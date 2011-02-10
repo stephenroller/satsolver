@@ -1,14 +1,8 @@
 #!/usr/bin/env python
+import sys
 from solver import *
 
 if __name__ == '__main__':
-    import sys
-    
-    # while True:
-    #     sys.stdout.write("> ")
-    #     
-    #     print "=?", example
-    
     while True:
         try:
             F = raw_input('> ')
