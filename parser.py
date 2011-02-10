@@ -2,6 +2,18 @@
 import ply.yacc as yacc
 from tokens import tokens
 
+class SATSyntaxError(Exception):
+    def __init__(self, mesg, charnum):
+        self.mesg = mesg
+        self.charnum = charnum
+
+
+class SATEndOfFileError(SATSyntaxError):
+    def __init__(self, mesg):
+        self.mesg = mesg
+        self.charnum = -1
+
+
 precedence = (
     ('left', 'EQL'),
     ('left', 'ORD2'),
@@ -21,16 +33,10 @@ def p_exists(p):
         tree = [p[1], atom, tree]
     p[0] = tree
 
-def p_atoms(p):
-    '''atoms : atoms COMMA ATOM
-             | LPAR atoms RPAR
-             | ATOM
+def p_expr_ord2_binop(p):
+    '''expr : LPAR atoms ORD2 atoms RPAR
     '''
-    PASS = 'PASS'
-    if len(p) == 2:
-        p[0] = [PASS, p[1]]
-    else:
-        p[0] = [PASS] + p[1][1:] + [p[3]]
+    p[0] = [p[3], p[2], p[4]]
 
 def p_expr_paren(p):
     '''expr : LPAR expr RPAR'''
@@ -45,10 +51,6 @@ def p_expr_circ_sm(p):
     '''
     p[0] = [p[1], p[2], p[4]]
 
-def p_expr_ord2_binop(p):
-    '''expr : LPAR atoms RPAR ORD2 LPAR atoms RPAR
-    '''
-    p[0] = [p[4], p[2], p[6]]
 
 def p_expr_binop(p):
     '''expr : expr EQL expr       %prec EQL
@@ -70,15 +72,23 @@ def p_literal(p):
                | ATOM'''
     p[0] = p[1]
 
-def p_error(p):
-    import sys
-    if p is None:
-        sys.stdout.write("Unexpected end of file.\n")
+def p_atoms(p):
+    '''atoms : atoms COMMA ATOM
+             | ATOM
+    '''
+    PASS = 'PASS'
+    if len(p) == 2:
+        # single atom
+        p[0] = [PASS, p[1]]
     else:
-        sys.stdout.write("-" * (p.lexpos + 3))
-        sys.stdout.write("^\n")
-        sys.stdout.write("Syntax error at '%s'.\n" % p.value)
-    sys.exit(1)
+        p[0] = [PASS] + p[1][1:] + [p[3]]
+
+
+def p_error(p):
+    if p is None:
+        raise SATEndOfFileError("Unexpected end of file.\n")
+    else:
+        raise SATSyntaxError("Syntax error at '%s'" % p.value, p.lexpos)
 
 def parse(string):
     parser = yacc.yacc()

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from parser import parse
+from parser import parse, SATSyntaxError
 
 def and_(arg1, arg2):
     if isinstance(arg1, bool) and arg1:
@@ -256,9 +256,15 @@ if __name__ == '__main__':
     
     print "=?", example
     satisfied = False
-    for solution in solutions(example):
-        print "=>", solution
-        satisfied = True
-    if not satisfied:
-        print "unsatisfiable."
+    try:
+        for solution in solutions(example):
+            print "=>", solution
+            satisfied = True
+        if not satisfied:
+            print "unsatisfiable."
+    except SATSyntaxError, se:
+        if se.charnum >= 0:
+            print "-" * (se.charnum + 3) + '^'
+        print se.mesg
+        sys.exit(1)
     print "done."
