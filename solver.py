@@ -86,6 +86,9 @@ def ident_(*args):
     return args
 
 def circ_(vars1, expr):
+    '''
+    The Circumscription operator, which finds minimal models. (see sm_)
+    '''
     vars2 = [v + '_' for v in vars1]
     
     rename_bindings = dict(zip(vars1, vars2))
@@ -97,6 +100,36 @@ def circ_(vars1, expr):
     tree = [and_, expr, [not_, tree]]
     
     return tree
+
+def sm_(vars1, expr):
+    vars2 = [v + '_' for v in vars1]
+    
+    rename_bindings = dict(zip(vars1, vars2))
+    replaced = replace_not_in_negation(expr, rename_bindings)
+    
+    tree = [and_, lessthan_(vars2, vars1), replaced]
+    for var_ in vars2:
+        tree = exists_(var_, tree)
+    tree = [and_, expr, [not_, tree]]
+    
+    return tree
+
+def replace_not_in_negation(expr, replacements):
+    '''
+    The F-diamond operator described in 
+    http://www.cs.utexas.edu/users/vl/papers/dpsm.pdf
+    '''
+    if isinstance(expr, list):
+        fn = expr[0]
+        args = expr[1:]
+        if fn == not_:
+            return expr
+        else:
+            return [fn] + [replace_not_in_negation(arg, replacements) for arg in args]
+    elif isinstance(expr, str) and expr in replacements:
+        return replacements[expr]
+    else:
+        return expr
 
 op_functions = {
     '!': not_,
@@ -113,6 +146,7 @@ op_functions = {
     '>=': greaterthaneq_,
     'PASS': ident_,
     'CIRC': circ_,
+    'SM': sm_,
 }
 
 # macros are functions that are better defined as a syntactical
@@ -125,6 +159,7 @@ macros = [
     greaterthaneq_,
     exists_,
     circ_,
+    sm_,
 ]
 
 def parse2ast(L):
