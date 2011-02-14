@@ -101,20 +101,8 @@ def circ_(vars1, expr):
     
     return tree
 
-def sm_(vars1, expr):
-    vars2 = [v + '_' for v in vars1]
-    
-    rename_bindings = dict(zip(vars1, vars2))
-    replaced = replace_not_in_negation(expr, rename_bindings)
-    
-    tree = [and_, lessthan_(vars2, vars1), replaced]
-    for var_ in vars2:
-        tree = exists_(var_, tree)
-    tree = [and_, expr, [not_, tree]]
-    
-    return tree
 
-def replace_not_in_negation(expr, replacements):
+def f_diamond(expr, replacements):
     '''
     The F-diamond operator described in 
     http://www.cs.utexas.edu/users/vl/papers/dpsm.pdf
@@ -125,11 +113,45 @@ def replace_not_in_negation(expr, replacements):
         if fn == not_:
             return expr
         else:
-            return [fn] + [replace_not_in_negation(arg, replacements) for arg in args]
+            return [fn] + [f_diamond(arg, replacements) for arg in args]
     elif isinstance(expr, str) and expr in replacements:
         return replacements[expr]
     else:
         return expr
+
+def f_star(expr, replacements):
+    if isinstance(expr, list):
+        fn = expr[0]
+        args = expr[1:]
+        if fn == not_:
+            return f_star([if_, args[0], False], replacements)
+        elif fn == if_:
+            return [and_, [if_, f_star(args[0], replacements), 
+                                f_star(args[1], replacements)],
+                          expr]
+        else:
+            return [fn, f_star(args[0], replacements), f_star(args[1], replacements)]
+    elif isinstance(expr, str) and expr in replacements:
+        return replacements[expr]
+    else:
+        return expr
+
+
+def sm_(vars1, expr, f_operator=f_star):
+    vars2 = [v + '_' for v in vars1]
+    
+    rename_bindings = dict(zip(vars1, vars2))
+    replaced = f_operator(expr, rename_bindings)
+    
+    tree = [and_, lessthan_(vars2, vars1), replaced]
+    for var_ in vars2:
+        tree = exists_(var_, tree)
+    tree = [and_, expr, [not_, tree]]
+    
+    return tree
+
+def smdl_(vars1, expr):
+    return sm_(vars1, expr, f_operator=f_diamond)
 
 op_functions = {
     '!': not_,
@@ -147,6 +169,7 @@ op_functions = {
     'PASS': ident_,
     'CIRC': circ_,
     'SM': sm_,
+    'SMDL': smdl_,
 }
 
 # macros are functions that are better defined as a syntactical

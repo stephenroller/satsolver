@@ -33,7 +33,7 @@ t_ORD2 = r'<(?![=-])|<=(?!>)|>=?'
 t_LPAR = r'\('
 t_RPAR = r'\)'
 t_ATOM = r'[a-z][a-z0-9_]*'
-t_CIRC_SM = r'CIRC|SM'
+t_CIRC_SM = r'CIRC|SM(DL)?'
 
 def t_FALSE(t):
     r'0'
