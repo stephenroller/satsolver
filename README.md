@@ -17,8 +17,7 @@ A simple SAT solver implemented in Python (with some non-SAT abilities).
 
     > (p -> q) <=> (!p | q)
     =  True
-    
-
+ 
 ## Connectors
 
   * false (0)
@@ -34,7 +33,7 @@ A bicontional formula, a <-> b, is rewritten as (a -> b) & (b -> a).
 
 ### Special connectors
 
-One wouldn't normally expect 
+These operators have no place in any SAT solver, but here they are anyway:
 
   * equivalence (A <=> B) - Returns true if and only if A <-> B is a tautology.
   * CIRC p1, p2, ... [ F ] - The [circumscription][circ] operator, which finds
