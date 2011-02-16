@@ -1,11 +1,15 @@
 #!/usr/bin/env python
 import sys
+import readline
 from solver import solutions as solutions_finder
 from parser import SATSyntaxError, SATEndOfFileError
 
 def nice_display(variables):
-    return "  ".join( (v and " %s" or "!%s") % k 
-                      for k,v in variables.iteritems() )
+    if variables is True or variables is False:
+        return variables
+    else:
+        return ", ".join( (v and " %s" or "!%s") % k 
+                          for k,v in variables.iteritems() )
 
 if __name__ == '__main__':
     while True:
@@ -36,6 +40,7 @@ if __name__ == '__main__':
                 satisfied = True
             if not satisfied:
                 print "unsatisfiable."
+            print 
         except SATSyntaxError, s:
             continue
         except (KeyboardInterrupt,EOFError):
